@@ -2,7 +2,7 @@ import type { MetaFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
 export const meta: MetaFunction = () => {
-	return [{ title: 'New Remix App' }, { name: 'description', content: 'Welcome to Remix!' }];
+	return [{ title: 'app-template-remix' }, { name: 'description', content: 'Welcome to app-template-remix' }];
 };
 
 export const loader = () => {
