@@ -1,23 +1,39 @@
-# use the official Bun image
-# see all versions at https://hub.docker.com/r/oven/bun/tags
-FROM oven/bun:1 as base
-WORKDIR /usr/src/app
+# === BUILD STAGE ===
+FROM node:20-alpine as builder
 
-# install dependencies into temp directory
-# this will cache them and speed up future builds
-FROM base AS install
+# Set the working directory in the container
+WORKDIR /app
 
-# install with --production (exclude devDependencies)
-RUN mkdir -p /temp/prod
-COPY package.json bun.lockb /temp/prod/
-RUN cd /temp/prod && bun install --frozen-lockfile --production
+# Copy package.json and yarn.lock files
+COPY package.json yarn.lock ./
 
-# copy production dependencies and source code into final image
-FROM base AS release
-COPY --from=install /temp/prod/node_modules node_modules
-COPY src/ src/
-COPY package.json .
+# Install dependencies
+RUN yarn install --frozen-lockfile
 
-EXPOSE 8080
+# Copy the rest of your application's code
+COPY . .
 
-ENTRYPOINT [ "bun", "run", "src/server.ts" ]
+# Build your Remix app
+RUN yarn build
+
+# Install production node_modules only
+RUN yarn install --frozen-lockfile --production
+
+# === RUN STAGE ===
+FROM node:20-alpine
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy built artifacts from the builder stage
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+# Expose the port your app runs on
+EXPOSE 3000
+
+# Define the command to run your app
+CMD ["yarn", "start"]
