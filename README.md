@@ -2,7 +2,7 @@
 
 This is a template repository for quickly bootstrapping a Noona HQ app.
 
-It is built on the popular framework Remix which makes it both simply to render complex UIs with React as well as creating API endpoints for consuming webhooks.
+It is built on the popular framework Remix which makes it both simple to render complex UIs with React as well as creating API endpoints for consuming webhooks.
 
 ## Prisma
 
