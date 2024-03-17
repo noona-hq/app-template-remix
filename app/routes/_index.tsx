@@ -10,6 +10,8 @@ export const loader = () => {
 	params.append('client_id', process.env.CLIENT_ID!);
 	params.append('response_type', 'code');
 	params.append('redirect_uri', `${process.env.APP_BASE_URL!}/oauth/callback`);
+	// TODO: Request the scopes you need
+	params.append('scope', 'events:read');
 
 	return {
 		consentScreenUrl: `${process.env.CONSENT_SCREEN_URL!}?${params.toString()}`,
