@@ -18,7 +18,7 @@ sed -i '' -e "s|$old_name|$new_db_name|g" prisma/schema.prisma
 
 # Global find and replace the old name with the new name, excluding this script file
 # It's important to exclude any .git directory, this script, or other directories/files you wish to exclude
-find package.json app helm -type f -exec sed -i '' -e "s|$old_name|$new_project_name|g" {} +
+find .env package.json app helm -type f -exec sed -i '' -e "s|$old_name|$new_project_name|g" {} +
 
 # If the project name affects directory names, rename them as well
 if [ -d "helm/$old_name" ]; then
