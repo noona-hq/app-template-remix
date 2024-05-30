@@ -6,6 +6,7 @@ module.exports = {
 			mode: 'tags',
 			target: 'api/index.ts',
 			schemas: 'api/models',
+			client: 'react-query',
 			tsconfig: './tsconfig.json',
 		},
 		input: {

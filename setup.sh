@@ -4,7 +4,7 @@
 read -p 'Enter the new project name: ' new_project_name
 
 # Template name
-old_name="app-template-remix"
+old_name="app-template-react"
 
 if [ ! -f ".env" ]; then
   cp .env.example .env
