@@ -1,4 +1,3 @@
-```markdown
 # app-template-remix
 
 A Remix-based application template designed for rapid development of scalable web applications.
@@ -32,4 +31,3 @@ A Remix-based application template designed for rapid development of scalable we
 - **Noona Services**: 
   - Authentication Service
   - Database Service
-```
