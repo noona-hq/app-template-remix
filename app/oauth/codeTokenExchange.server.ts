@@ -13,7 +13,6 @@ export const codeTokenExchange = async ({ code }: CodeTokenExchangeParams) => {
 			code,
 			grant_type: OAuthTokenRequestGrantType.authorization_code,
 		},
-		undefined,
 		getClientAuthorizationOptions()
 	);
 
