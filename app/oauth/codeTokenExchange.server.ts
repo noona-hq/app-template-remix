@@ -1,6 +1,8 @@
 import { OAuthTokenRequestGrantType } from 'api/models';
 import { getOAuthToken } from 'api/oauth';
 
+import { getClientAuthorizationOptions } from './clientAuthorization.server';
+
 type CodeTokenExchangeParams = {
 	code: string;
 };
@@ -11,10 +13,8 @@ export const codeTokenExchange = async ({ code }: CodeTokenExchangeParams) => {
 			code,
 			grant_type: OAuthTokenRequestGrantType.authorization_code,
 		},
-		{
-			client_id: process.env.CLIENT_ID!,
-			client_secret: process.env.CLIENT_SECRET!,
-		}
+		undefined,
+		getClientAuthorizationOptions()
 	);
 
 	return tokens;
