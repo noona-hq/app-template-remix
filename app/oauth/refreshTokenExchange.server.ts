@@ -13,7 +13,6 @@ export const refreshTokenExchange = async ({ refreshToken }: RefreshTokenExchang
 			refresh_token: refreshToken,
 			grant_type: OAuthTokenRequestGrantType.refresh_token,
 		},
-		undefined,
 		getClientAuthorizationOptions()
 	);
 
